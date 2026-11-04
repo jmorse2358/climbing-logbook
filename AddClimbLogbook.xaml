@@ -1,0 +1,125 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    	    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        	x:Class="Climbing_Logbook.AddClimbLogbook">
+
+    <ScrollView BackgroundColor="LightGray">
+        <VerticalStackLayout Padding="10" Spacing="25">
+
+            <HorizontalStackLayout>
+                <!-- name of the climb, uses entry_name xName -->
+                <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                    <VerticalStackLayout >
+                        <Label Text="Name*" FontAttributes="Bold"/>
+                        <Entry x:Name="entry_name" Placeholder="Name of climb"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- date of the climb, uses the picker_date xName -->
+                <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                    <VerticalStackLayout>
+                        <Label Text="Date" FontAttributes="Bold"/>
+                        <DatePicker x:Name="picker_date"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
+
+            <!-- The type button list, images found under resources/images, climb_type_selected xName -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Type" FontAttributes="Bold"/>
+                    <HorizontalStackLayout>
+                        <ImageButton x:Name="btn_sport" Source="sport.png" WidthRequest="50" HeightRequest="50" Clicked="climb_type_selected"/>
+                        <ImageButton x:Name="btn_trad" Source="trad.png" WidthRequest="50" HeightRequest="50" Clicked="climb_type_selected" />
+                        <ImageButton x:Name="btn_bouldering" Source="bouldering.png" WidthRequest="50" HeightRequest="50" Clicked="climb_type_selected" />
+                        <ImageButton x:Name="btn_toprope" Source="toprope.png" WidthRequest="50" HeightRequest="50" Clicked="climb_type_selected" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- enter notes section, xName entry_notes -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Notes" FontAttributes="Bold"/>
+                    <Editor x:Name="entry_notes" Placeholder="Tap to make additional notes"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- enter actual grade, xName picker_actual_grade -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Actual Grade*" FontAttributes="Bold"/>
+                    <Picker x:Name="picker_actual_grade"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- enter recommended grade, xName picker_recommended_grade -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Recommended Grade"  FontAttributes="Bold"/>
+                    <Picker x:Name="picker_recommended_grade"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- attempts section, uses entry_attempts xName -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Attempts*" FontAttributes="Bold"/>
+                    <Entry x:Name="entry_attempts" Keyboard="Numeric" Placeholder="Enter attempt number"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- climbing location, calls the climb_location_changed if changed & xName: radio_outdoor & radio_indoor -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Climbing Location" FontAttributes="Bold"/>
+                    <HorizontalStackLayout>
+                        <RadioButton x:Name="radio_outdoor" Content="Outdoor" CheckedChanged="climb_location_changed"/>
+                        <RadioButton x:Name="radio_indoor" Content="Indoor" CheckedChanged="climb_location_changed"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- rock type picker, xName: picker_rock_type, dependant on the state of climbing location, logic done in the c# file -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Rock Type" FontAttributes="Bold"/>
+                    <Picker x:Name="picker_rock_type" IsEnabled="False"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- picker for the rock quality, xName: slider_rock_quality, same as above for dependability -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Rock Quality" FontAttributes="Bold"/>
+                    <Slider x:Name="slider_rock_quality" Minimum="0" Maximum="1" Value="0.5" IsEnabled="False"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- whole tag deconstructor thing, logic mostly done in the c# file -->
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Tags" FontAttributes="Bold"/>
+                    <Entry x:Name="entry_tag_search" Placeholder="Search for tags to add" TextChanged="filter_tags"/>
+                    <!-- dynamic display for the available tags -->
+                    <CollectionView x:Name="list_tags" SelectionMode="Multiple"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="20" BackgroundColor="DarkGray" Padding="10"  Margin="10" HasShadow="False" HorizontalOptions="CenterAndExpand" VerticalOptions="End">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <!-- saves the climb -->
+                        <ImageButton x:Name="btn_save" Source="save.png" WidthRequest="50" HeightRequest="50"/>
+
+                        <!-- adds the climb calls create_new_entry -->
+                        <ImageButton x:Name ="btn_add" Source="add_climb.png" WidthRequest="50" HeightRequest="50" Clicked="create_new_entry"/>
+
+                        <!-- this is what it does on every page -->
+                        <ImageButton Source="info.png" WidthRequest="50" HeightRequest="50" Clicked="display_info"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

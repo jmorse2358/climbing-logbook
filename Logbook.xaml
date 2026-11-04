@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- links to the Climbing_Logbook namespace, with the title: Logbook -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Climbing_Logbook.Logbook"
+             Title="Logbook">
+
+    <!-- dynamic grid defined & attributes set-->
+    <Grid BackgroundColor="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- linked to the c# file here using the name log_list -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout x:Name="log_list" />
+        </ScrollView>
+
+        <!-- Wrap the buttons inside a Frame for rounded corners and alignment -->
+        <Frame Grid.Row="1" BackgroundColor="White" Padding="10" HasShadow="False" 
+               HorizontalOptions="CenterAndExpand" VerticalOptions="End" 
+               CornerRadius="20">
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <!-- add climb button defined here, calls add_climb_click -->
+                <ImageButton Source="add_climb.png" 
+                             WidthRequest="50" 
+                             HeightRequest="50" 
+                             Clicked="add_climb_click"/>
+
+                <!-- info button defined here, calls display_info-->
+                <ImageButton Source="info.png" 
+                             WidthRequest="50" 
+                             HeightRequest="50" 
+                             Clicked="display_info"/>
+            </HorizontalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>
